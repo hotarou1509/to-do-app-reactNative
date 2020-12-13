@@ -1,0 +1,79 @@
+import React from 'react';
+import { Image, StyleSheet } from 'react-native';
+import { COLORS, icons } from '../constants';
+import { Home } from '../screens';
+import { ToDoTasksList, DoneTasksList } from '../components';
+
+/* Tab Navigation */
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+const Tab = createBottomTabNavigator();
+
+const tabOptions = {
+	showLabel: false,
+	style: {
+		height: '8%',
+	},
+};
+
+const Tabs = () => {
+	return (
+		<Tab.Navigator
+			tabBarOptions={tabOptions}
+			screenOptions={({ route }) => ({
+				tabBarIcon: ({ focused }) => {
+					const tintColor = focused ? COLORS.primary : COLORS.gray;
+					switch (route.name) {
+						case 'ToDo':
+							return (
+								<Image
+									source={icons.todo}
+									resizeMode='contain'
+									style={{
+										tintColor: tintColor,
+										...styles.iconStyle,
+									}}
+								/>
+							);
+						case 'Done':
+							return (
+								<Image
+									source={icons.checked}
+									resizeMode='contain'
+									style={{
+										tintColor: tintColor,
+										...styles.iconStyle,
+									}}
+								/>
+							);
+					}
+				},
+			})}>
+			<Tab.Screen
+				name='ToDo'
+				children={() => <Home Content={ToDoTasksList} />}
+			/>
+			<Tab.Screen
+				name='Done'
+				children={() => <Home Content={DoneTasksList} />}
+			/>
+		</Tab.Navigator>
+	);
+};
+
+const styles = StyleSheet.create({
+	iconStyle: {
+		width: 25,
+		height: 25,
+	},
+	tabStyle: {
+		width: '50%',
+		backgroundColor: COLORS.primary,
+		height: 70,
+		marginTop: 20,
+		borderTopRightRadius: 25,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+});
+
+export default Tabs;
