@@ -19,6 +19,7 @@ export const todo = require('../../assets/icons/to-do-list.png');
 export const checked = require('../../assets/icons/checked.png');
 export const del = require('../../assets/icons/delete.png');
 export const edit = require('../../assets/icons/edit.png');
+export const undo = require('../../assets/icons/undo.png');
 
 export default {
 	camera,
@@ -42,4 +43,5 @@ export default {
 	checked,
 	del,
 	edit,
+	undo,
 };

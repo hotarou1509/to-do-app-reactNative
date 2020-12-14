@@ -7,26 +7,64 @@ import {
 	Image,
 	FlatList,
 } from 'react-native';
+import { useDispatch } from 'react-redux';
 import { COLORS, icons } from '../constants';
+import {
+	checkTaskAction,
+	deleteTaskAction,
+	editTaskAction,
+	uncheckTaskAction,
+} from '../redux/actions/todoAppActions';
 
-const btnList = [
+const btnTodo = [
 	{ btnName: 'edit', btnSrc: icons.edit },
 	{ btnName: 'checked', btnSrc: icons.checked },
 	{ btnName: 'del', btnSrc: icons.del },
 ];
 
+const btnDone = [
+	{ btnName: 'undo', btnSrc: icons.undo },
+	{ btnName: 'del', btnSrc: icons.del },
+];
+
 const Task = (props) => {
-	const { taskName } = props.Content;
+	const { taskName, done } = props.Content;
+	const dispatch = useDispatch();
+
+	const handleOnPress = (btnName) => {
+		switch (btnName) {
+			case 'checked':
+				dispatch(checkTaskAction(taskName));
+				break;
+
+			case 'undo':
+				dispatch(uncheckTaskAction(taskName));
+				break;
+
+			case 'del':
+				dispatch(deleteTaskAction(taskName));
+				break;
+
+			case 'edit':
+				dispatch(editTaskAction(taskName));
+				break;
+			default:
+				break;
+		}
+	};
 
 	const renderButtons = () => {
 		return (
 			<View style={styles.btnContainer}>
 				<FlatList
 					horizontal
-					data={btnList}
+					data={done ? btnDone : btnTodo}
 					keyExtractor={(item) => item.btnName}
 					renderItem={({ item }) => (
-						<TouchableOpacity>
+						<TouchableOpacity
+							onPress={() => {
+								handleOnPress(item.btnName);
+							}}>
 							<View style={styles.btnStyle}>
 								<Image
 									source={item.btnSrc}
@@ -65,7 +103,7 @@ const styles = StyleSheet.create({
 		color: COLORS.secondary,
 	},
 	btnContainer: {
-		paddingLeft: 140,
+		alignItems: 'flex-end',
 	},
 	btnStyle: {
 		backgroundColor: COLORS.primary,

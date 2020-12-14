@@ -1,7 +1,7 @@
 import React from 'react';
-import { Image, StyleSheet } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { COLORS, icons } from '../constants';
-import { Home } from '../screens';
+import { Home, AddTask } from '../screens';
 import { ToDoTasksList, DoneTasksList } from '../components';
 
 /* Tab Navigation */
@@ -13,6 +13,18 @@ const tabOptions = {
 	style: {
 		height: '8%',
 	},
+};
+
+const AddTaskButton = () => {
+	return (
+		<View style={styles.addTaskBtnContainer}>
+			<Image
+				source={icons.plus}
+				resizeMode='contain'
+				style={styles.addTaskBtnIcon}
+			/>
+		</View>
+	);
 };
 
 const Tabs = () => {
@@ -34,6 +46,9 @@ const Tabs = () => {
 									}}
 								/>
 							);
+						case 'Add': {
+							return <AddTaskButton />;
+						}
 						case 'Done':
 							return (
 								<Image
@@ -52,6 +67,7 @@ const Tabs = () => {
 				name='ToDo'
 				children={() => <Home Content={ToDoTasksList} />}
 			/>
+			<Tab.Screen name='Add' component={AddTask} />
 			<Tab.Screen
 				name='Done'
 				children={() => <Home Content={DoneTasksList} />}
@@ -73,6 +89,21 @@ const styles = StyleSheet.create({
 		borderTopRightRadius: 25,
 		alignItems: 'center',
 		justifyContent: 'center',
+	},
+	addTaskBtnContainer: {
+		alignItems: 'center',
+		justifyContent: 'center',
+		width: 60,
+		height: 60,
+		borderRadius: 30,
+		backgroundColor: COLORS.primary,
+		top: -10,
+		elevation: 5,
+	},
+	addTaskBtnIcon: {
+		width: 23,
+		height: 23,
+		tintColor: COLORS.white,
 	},
 });
 
