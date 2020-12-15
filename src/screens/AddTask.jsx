@@ -18,6 +18,7 @@ export default function AddTask() {
 	const handleOnPress = () => {
 		const id = uuidv1(); // Create a unique timestamp random id for each task
 		dispatch(addTaskAction(input, id));
+		setInput('');
 	};
 
 	return (
@@ -28,6 +29,7 @@ export default function AddTask() {
 					placeholderTextColor='#b1e5d3'
 					style={styles.inputText}
 					onChangeText={(text) => handleInputText(text)}
+					value={input}
 				/>
 			</View>
 			<TouchableOpacity
