@@ -1,7 +1,7 @@
 import React from 'react';
-import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 import { COLORS, icons } from '../constants';
-import { Home, AddTask } from '../screens';
+import { Home } from '../screens';
 import { ToDoTasksList, DoneTasksList } from '../components';
 
 /* Tab Navigation */
@@ -13,18 +13,6 @@ const tabOptions = {
 	style: {
 		height: '8%',
 	},
-};
-
-const AddTaskButton = () => {
-	return (
-		<View style={styles.addTaskBtnContainer}>
-			<Image
-				source={icons.plus}
-				resizeMode='contain'
-				style={styles.addTaskBtnIcon}
-			/>
-		</View>
-	);
 };
 
 const Tabs = () => {
@@ -46,9 +34,6 @@ const Tabs = () => {
 									}}
 								/>
 							);
-						case 'Add': {
-							return <AddTaskButton />;
-						}
 						case 'Done':
 							return (
 								<Image
@@ -67,7 +52,6 @@ const Tabs = () => {
 				name='ToDo'
 				children={() => <Home Content={ToDoTasksList} />}
 			/>
-			<Tab.Screen name='Add' component={AddTask} />
 			<Tab.Screen
 				name='Done'
 				children={() => <Home Content={DoneTasksList} />}

@@ -1,28 +1,39 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
-import { useDispatch } from 'react-redux';
-import { COLORS } from '../constants';
-import { addTaskAction } from '../redux/actions/todoAppActions';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { TextInput } from 'react-native-gesture-handler';
+import { useDispatch, useSelector } from 'react-redux';
+import { COLORS } from '../../constants';
+import {
+	addEditTaskAction,
+	hideModalAction,
+} from '../../redux/actions/todoAppActions';
 import 'react-native-get-random-values';
 import { v1 as uuidv1 } from 'uuid';
 
-export default function AddTask() {
+export default function TaskInput() {
 	const [input, setInput] = useState('');
 	const dispatch = useDispatch();
+	const currentEdit = useSelector(
+		(state) => state.todoAppReducer.currentEdit,
+	);
+
+	useEffect(() => {
+		setInput(currentEdit.taskName);
+	}, [currentEdit]);
 
 	const handleInputText = (text) => {
 		setInput(text);
 	};
 
 	const handleOnPress = () => {
-		const id = uuidv1(); // Create a unique timestamp random id for each task
-		dispatch(addTaskAction(input, id));
+		const id = currentEdit.id ? currentEdit.id : uuidv1(); // Create a unique timestamp random id for each task
+		dispatch(addEditTaskAction(input, id));
 		setInput('');
+		dispatch(hideModalAction());
 	};
 
 	return (
-		<>
+		<View>
 			<View style={styles.inputContainer}>
 				<TextInput
 					placeholder='Add task'
@@ -36,9 +47,9 @@ export default function AddTask() {
 				style={styles.btnAdd}
 				onPress={handleOnPress}
 				disabled={!input.trim()}>
-				<Text style={styles.btnText}>Add</Text>
+				<Text style={styles.btnText}>Save</Text>
 			</TouchableOpacity>
-		</>
+		</View>
 	);
 }
 
@@ -47,9 +58,9 @@ const styles = StyleSheet.create({
 		backgroundColor: COLORS.white,
 		paddingVertical: 16,
 		paddingHorizontal: 20,
-		marginHorizontal: 20,
+		marginHorizontal: 10,
 		borderRadius: 15,
-		marginTop: 80,
+		marginTop: 30,
 		flexDirection: 'row',
 		alignItems: 'flex-start',
 		justifyContent: 'flex-start',
@@ -58,7 +69,7 @@ const styles = StyleSheet.create({
 	inputText: {
 		fontWeight: 'bold',
 		fontSize: 18,
-		width: 260,
+		width: 200,
 	},
 	btnAdd: {
 		backgroundColor: COLORS.primary,
@@ -69,7 +80,7 @@ const styles = StyleSheet.create({
 		marginTop: 30,
 		flexDirection: 'row',
 		justifyContent: 'center',
-		elevation: 3,
+		elevation: 10,
 	},
 	btnText: {
 		fontWeight: 'bold',

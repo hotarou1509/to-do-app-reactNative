@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
 	View,
 	Text,
@@ -8,13 +8,13 @@ import {
 	FlatList,
 } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { COLORS, icons } from '../constants';
+import { COLORS, icons } from '../../constants';
 import {
 	checkTaskAction,
 	deleteTaskAction,
-	editTaskAction,
 	uncheckTaskAction,
-} from '../redux/actions/todoAppActions';
+	showModalToEditAction,
+} from '../../redux/actions/todoAppActions';
 
 const btnTodo = [
 	{ btnName: 'edit', btnSrc: icons.edit },
@@ -28,25 +28,25 @@ const btnDone = [
 ];
 
 const Task = (props) => {
-	const { taskName, done } = props.Content;
+	const { id, taskName, done } = props.Content;
 	const dispatch = useDispatch();
 
 	const handleOnPress = (btnName) => {
 		switch (btnName) {
 			case 'checked':
-				dispatch(checkTaskAction(taskName));
+				dispatch(checkTaskAction(id));
 				break;
 
 			case 'undo':
-				dispatch(uncheckTaskAction(taskName));
+				dispatch(uncheckTaskAction(id));
 				break;
 
 			case 'del':
-				dispatch(deleteTaskAction(taskName));
+				dispatch(deleteTaskAction(id));
 				break;
 
 			case 'edit':
-				dispatch(editTaskAction(taskName));
+				dispatch(showModalToEditAction(id));
 				break;
 			default:
 				break;

@@ -1,43 +1,58 @@
 import {
-	ADD_TASK,
+	ADD_EDIT_TASK,
 	CHECK_TASK,
 	DELETE_TASK,
-	EDIT_TASK,
+	HIDE_MODAL,
+	SHOW_MODAL_TO_ADD,
+	SHOW_MODAL_TO_EDIT,
 	UNCHECK_TASK,
 } from '../constants/reduxConst';
 
-export const checkTaskAction = (taskName) => {
+export const checkTaskAction = (id) => {
 	return {
 		type: CHECK_TASK,
-		taskName,
+		id,
 	};
 };
 
-export const uncheckTaskAction = (taskName) => {
+export const uncheckTaskAction = (id) => {
 	return {
 		type: UNCHECK_TASK,
-		taskName,
+		id,
 	};
 };
 
-export const deleteTaskAction = (taskName) => {
+export const deleteTaskAction = (id) => {
 	return {
 		type: DELETE_TASK,
-		taskName,
+		id,
 	};
 };
 
-export const editTaskAction = (taskName) => {
+export const addEditTaskAction = (taskName, id) => {
 	return {
-		type: EDIT_TASK,
+		type: ADD_EDIT_TASK,
 		taskName,
+		id,
 	};
 };
 
-export const addTaskAction = (taskName, id) => {
+export const showModalToAddAction = () => {
 	return {
-		type: ADD_TASK,
-		taskName,
+		type: SHOW_MODAL_TO_ADD,
+	};
+};
+
+export const showModalToEditAction = (id) => {
+	return {
+		type: SHOW_MODAL_TO_EDIT,
+		id,
+	};
+};
+
+export const hideModalAction = (id) => {
+	return {
+		type: HIDE_MODAL,
 		id,
 	};
 };
