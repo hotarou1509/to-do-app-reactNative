@@ -11,7 +11,7 @@ import {
 const initialState = {
 	taskList: [],
 	modalVisible: false,
-	currentEdit: { taskName: '' },
+	currentEdit: { id: '', taskName: '' },
 };
 
 const getTaskListItemById = (arr, id) => {
@@ -65,6 +65,7 @@ const todoAppReducer = (state = initialState, action) => {
 		}
 		case SHOW_MODAL_TO_ADD: {
 			state.modalVisible = true;
+			state.currentEdit.taskName = '';
 			return { ...state };
 		}
 		case SHOW_MODAL_TO_EDIT: {
