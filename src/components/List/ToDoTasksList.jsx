@@ -14,12 +14,15 @@ import { COLORS, icons } from '../../constants';
 import { showModalToAddAction } from '../../redux/actions/todoAppActions';
 import ModalBox from '../Modal/ModalBox';
 import Task from './Task';
+import 'react-native-get-random-values';
+import { v1 as uuidv1 } from 'uuid';
 
 const ToDoTasksList = () => {
 	const taskList = useSelector((state) => state.todoAppReducer.taskList);
 	const dispatch = useDispatch();
 
 	const [isEmpty, setIsEmpty] = useState(true);
+	const [newID, setID] = useState('');
 
 	const checkListEmpty = () => {
 		let itemExist = taskList.find((item) => item.done === false);
@@ -46,7 +49,8 @@ const ToDoTasksList = () => {
 					<Text style={styles.heading}>Tasks list</Text>
 					<TouchableOpacity
 						onPress={() => {
-							dispatch(showModalToAddAction());
+							setID(uuidv1());
+							dispatch(showModalToAddAction(newID));
 						}}>
 						<Image
 							source={icons.plus}

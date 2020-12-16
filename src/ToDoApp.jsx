@@ -6,7 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Tabs from './navigation/Tabs';
 const Stack = createStackNavigator();
 
-export default ToDoApp = () => {
+const ToDoApp = () => {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator initialRouteName={'Home'}>
@@ -20,3 +20,5 @@ export default ToDoApp = () => {
 		</NavigationContainer>
 	);
 };
+
+export default ToDoApp;

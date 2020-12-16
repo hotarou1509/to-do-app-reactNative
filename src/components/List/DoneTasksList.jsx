@@ -11,7 +11,7 @@ const DoneTaskList = () => {
 	const [isEmpty, setIsEmpty] = useState(true);
 
 	const checkListEmpty = () => {
-		let itemExist = taskList.find((item) => item.done === false);
+		let itemExist = taskList.find((item) => item.done === true);
 		if (itemExist) {
 			setIsEmpty(false);
 			return;

@@ -29,17 +29,17 @@ export const deleteTaskAction = (id) => {
 	};
 };
 
-export const addEditTaskAction = (taskName, id) => {
+export const addEditTaskAction = (taskName) => {
 	return {
 		type: ADD_EDIT_TASK,
 		taskName,
-		id,
 	};
 };
 
-export const showModalToAddAction = () => {
+export const showModalToAddAction = (id) => {
 	return {
 		type: SHOW_MODAL_TO_ADD,
+		id,
 	};
 };
 

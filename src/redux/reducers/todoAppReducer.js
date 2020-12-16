@@ -11,7 +11,11 @@ import {
 const initialState = {
 	taskList: [],
 	modalVisible: false,
-	currentEdit: { id: '', taskName: '' },
+	currentEdit: {
+		id: '2c5ea4c0-4067-11e9-8bad-9b1deb4d3b7d',
+		taskName: '',
+		done: false,
+	},
 };
 
 const getTaskListItemById = (arr, id) => {
@@ -21,7 +25,8 @@ const getTaskListItemById = (arr, id) => {
 
 const getTaskListIndexById = (arr, id) => {
 	let taskListUpdate = arr;
-	return taskListUpdate.findIndex((item) => item.id === id);
+	const index = taskListUpdate.findIndex((item) => item.id === id);
+	return index;
 };
 
 const todoAppReducer = (state = initialState, action) => {
@@ -48,16 +53,19 @@ const todoAppReducer = (state = initialState, action) => {
 		case ADD_EDIT_TASK: {
 			let checkExistIndex = getTaskListIndexById(
 				taskListUpdate,
-				action.id,
+				state.currentEdit.id,
 			);
+			console.log(checkExistIndex);
 			if (checkExistIndex === -1) {
+				//add new Task
 				let newTask = {
-					id: action.id,
+					id: state.currentEdit.id,
 					taskName: action.taskName,
 					done: false,
 				};
 				taskListUpdate.push(newTask);
 			} else {
+				// Edit task
 				taskListUpdate[checkExistIndex].taskName = action.taskName;
 			}
 			state.taskList = taskListUpdate;
@@ -65,12 +73,17 @@ const todoAppReducer = (state = initialState, action) => {
 		}
 		case SHOW_MODAL_TO_ADD: {
 			state.modalVisible = true;
+			state.currentEdit.id = action.id;
 			state.currentEdit.taskName = '';
 			return { ...state };
 		}
 		case SHOW_MODAL_TO_EDIT: {
 			state.modalVisible = true;
-			state.currentEdit = getTaskListItemById(taskListUpdate, action.id);
+			state.currentEdit.id = action.id;
+			state.currentEdit.taskName = getTaskListItemById(
+				taskListUpdate,
+				action.id,
+			).taskName;
 			return { ...state };
 		}
 		case HIDE_MODAL: {

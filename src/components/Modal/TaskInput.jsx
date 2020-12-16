@@ -7,8 +7,6 @@ import {
 	addEditTaskAction,
 	hideModalAction,
 } from '../../redux/actions/todoAppActions';
-import 'react-native-get-random-values';
-import { v1 as uuidv1 } from 'uuid';
 
 export default function TaskInput() {
 	const [input, setInput] = useState('');
@@ -26,8 +24,7 @@ export default function TaskInput() {
 	};
 
 	const handleOnPress = () => {
-		const id = currentEdit.id ? currentEdit.id : uuidv1(); // Create a unique timestamp random id for each task
-		dispatch(addEditTaskAction(input, id));
+		dispatch(addEditTaskAction(input));
 		setInput('');
 		dispatch(hideModalAction());
 	};
