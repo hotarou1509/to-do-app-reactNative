@@ -55,7 +55,6 @@ const todoAppReducer = (state = initialState, action) => {
 				taskListUpdate,
 				state.currentEdit.id,
 			);
-			console.log(checkExistIndex);
 			if (checkExistIndex === -1) {
 				//add new Task
 				let newTask = {

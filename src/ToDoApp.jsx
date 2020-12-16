@@ -3,6 +3,7 @@ import React from 'react';
 /* Initiallizing Navigation */
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+
 import Tabs from './navigation/Tabs';
 const Stack = createStackNavigator();
 

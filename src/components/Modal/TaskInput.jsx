@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
+import {
+	View,
+	Text,
+	StyleSheet,
+	TouchableOpacity,
+	TextInput,
+} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { COLORS } from '../../constants';
 import {
