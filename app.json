@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "to-do-list",
-    "slug": "to-do-list",
+    "name": "My Todo",
+    "slug": "my-to-do",
     "version": "1.0.0",
     "orientation": "portrait",
     "sdkVersion": "40.0.0",
@@ -24,9 +24,6 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
     }
   }
 }

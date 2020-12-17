@@ -1,5 +1,4 @@
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
 	View,
 	Text,
@@ -9,7 +8,6 @@ import {
 	Image,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react/cjs/react.development';
 import { COLORS, icons } from '../../constants';
 import { showModalToAddAction } from '../../redux/actions/todoAppActions';
 import ModalBox from '../Modal/ModalBox';
